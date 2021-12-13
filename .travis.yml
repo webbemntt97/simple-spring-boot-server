@@ -1,3 +1,33 @@
 language: java
 jdk:
   - oraclejdk11
+env:
+  global:
+    # COVERITY_SCAN_TOKEN
+    # ** specific to your project **
+    - secure: "Za5sS0oo7tLyP5XOVrlFAW/gyTO/7kRvRZ3p28eFqQO/kZtM5ADikTL78SaBRLMmiicIS/nby7zBFgME7gk4G00F2e6SsWDNYyiKEmsBoTSZ9f7BXlMUMRpYJL05Wg+nk8TeB8FGo/M30zzEWa8bCj1fDLz9n2uzKDbPgMRbuUbq090G9bf4IThDPS1JwlyfnhMuUlIo+sWDBDbYkMYq3kt21m50fyb0ZzE+7Ns7noIwnUenHjA60SpT+G+x+gH1La+ALnYpD7Ib0Ip8f2kqN3wLTxC8kcUoCYYnzzDoGFQGNXi56QHVFNCZFTL7xlwN2WYTqn6qMiTR6wc8B1cmipBVOUQc6rY8aWHGklBv9BwRUP8tg/ub/Nb1xlC6ciyNrPSsfCTIAZlow6tSYqTD3XyqKpKvu+E/RexwPvzHOzprDE4q2RoLvjbdTHKZ6qMc6QFWuJyZ/OtT8wgBPlo8i5G66gA//WkKCfdYNXlvc8zizvv68xYIi+/CU/JVCHqTV3LrvPTOW+0b2rN3FV1haiRBZ6rlyPmnsDWnCHlqlZYZ9Y29exZNzzMF7Pe2GcJf3Qzx0WazfCCQg+0xqqMqWEE9uFsXH0PLbv5zrJp0vA6DA7MY2duoWNJV4tML1iV751w6zu0PLOrn9tTZ9pKg59sV1SeEfKoRA0M1PIx1Ov0="
+
+addons:
+  coverity_scan:
+
+    # GitHub project metadata
+    # ** specific to your project **
+    project:
+      name: webbemntt97/simple-spring-boot-server
+      version: 1.0
+      description: My Project
+
+    notification_email: mattia.simone97@gmail.com
+
+    # Commands to prepare for build_command
+    # ** likely specific to your build **
+    build_command_prepend: ./configure
+
+    # The command that will be added as an argument to "cov-build" to compile your project for analysis,
+    # ** likely specific to your build **
+    build_command: ./mvnw clean install -DskipTests=true -Dmaven.javadoc.skip=true
+
+    # Pattern to match selecting branches that will run analysis. We recommend leaving this set to 'coverity_scan'.
+    # Take care in resource usage, and consider the build frequency allowances per
+    #   https://scan.coverity.com/faq#frequency
+    branch_pattern: coverity_scan
